@@ -31,7 +31,7 @@ function PageSheet({ index, sheet, total, current }: { index: number; sheet: She
     const t = theta.current;
     const k = (Math.sin(t) * 1.1 * dir.current) / PW;
     const zUn = (total - index) * GAP;
-    const zTu = index * GAP;
+    const zTu = (index + 1) * GAP;
     const zb = zUn + (zTu - zUn) * (t / Math.PI);
     const pos = geo.getAttribute("position").array as Float32Array;
     for (let i = 0; i < pos.length; i += 3) {
@@ -66,8 +66,8 @@ function Book({ sheets, current, ended }: { sheets: Sheet[]; current: number; en
   const { camera, size } = useThree();
   const intro = useRef(0);
   const S = sheets.length;
-  const rightD = Math.max(0.001, (S - current) * GAP);
-  const leftD = Math.max(0.001, current * GAP);
+  const rightD = Math.max(0.0005, (S - current) * GAP - GAP * 0.8);
+  const leftD = Math.max(0.0005, current * GAP - GAP * 0.8);
 
   useFrame((_, dt) => {
     intro.current = Math.min(1, intro.current + dt / 1.8);
