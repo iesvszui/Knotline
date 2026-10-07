@@ -148,6 +148,7 @@ export default function Reader3D({ pub, onExit }: { pub: Publication; onExit: ()
       return () => clearTimeout(t);
     }
     setShowEnd(false);
+    return undefined;
   }, [current, S]);
 
   useEffect(() => {

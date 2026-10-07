@@ -107,7 +107,7 @@ export async function buildPages(pub: Publication) {
       ctx.fillText(`KNOTLINE — ${pub.title.toUpperCase()}`, 60, 64);
       ctx.letterSpacing = "0px";
       ctx.fillRect(60, 80, W - 120, 1);
-      const section = pub.sections[Math.floor((p - 2) / 4) % pub.sections.length];
+      const section = pub.sections[Math.floor((p - 2) / 4) % pub.sections.length] ?? "";
       const layout = p % 4;
       let y = 140;
       if (layout === 2 || layout === 0) {
