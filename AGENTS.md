@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- The whole visitor journey (hero → shelf → focus → 3D reader) lives in one `Experience` component with a phase state; route files only pick the starting phase — keeps cinematic transitions continuous without page navigations.
+- The 3D reader (React Three Fiber) is lazy-loaded and only rendered client-side — WebGL and canvas page textures can't run during SSR.
