@@ -19,7 +19,7 @@ function PageSheet({ index, sheet, total, current }: { index: number; sheet: She
     g.translate(PW / 2, 0, 0);
     return g;
   }, []);
-  const base = useMemo(() => Float32Array.from(geo.attributes.position.array as Float32Array), [geo]);
+  const base = useMemo(() => Float32Array.from(geo.getAttribute("position").array as Float32Array), [geo]);
   const theta = useRef(index < current ? Math.PI : 0);
   const dir = useRef(1);
 
@@ -33,9 +33,9 @@ function PageSheet({ index, sheet, total, current }: { index: number; sheet: She
     const zUn = (total - index) * GAP;
     const zTu = index * GAP;
     const zb = zUn + (zTu - zUn) * (t / Math.PI);
-    const pos = geo.attributes.position.array as Float32Array;
+    const pos = geo.getAttribute("position").array as Float32Array;
     for (let i = 0; i < pos.length; i += 3) {
-      const x = base[i];
+      const x = base[i]!;
       let X: number, Z: number;
       if (Math.abs(k) < 1e-4) {
         X = x * Math.cos(t); Z = x * Math.sin(t);
@@ -45,7 +45,7 @@ function PageSheet({ index, sheet, total, current }: { index: number; sheet: She
       }
       pos[i] = X; pos[i + 2] = Z + zb;
     }
-    geo.attributes.position.needsUpdate = true;
+    geo.getAttribute("position").needsUpdate = true;
     geo.computeVertexNormals();
   });
 

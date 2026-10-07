@@ -15,7 +15,7 @@ export function ImageTrail({ slow = false }: { slow?: boolean }) {
   useEffect(() => {
     const el = ref.current!;
     const spawn = (x: number, y: number) => {
-      const item = { id: id.current++, x, y, src: trailImages[idx.current++ % trailImages.length], r: (Math.random() - 0.5) * 8 };
+      const item = { id: id.current++, x, y, src: trailImages[idx.current++ % trailImages.length]!, r: (Math.random() - 0.5) * 8 };
       setItems((s) => [...s.slice(-14), item]);
       setTimeout(() => setItems((s) => s.filter((i) => i.id !== item.id)), slowRef.current ? 2600 : 1300);
     };

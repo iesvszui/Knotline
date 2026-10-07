@@ -111,7 +111,7 @@ export async function buildPages(pub: Publication) {
       const layout = p % 4;
       let y = 140;
       if (layout === 2 || layout === 0) {
-        cover(ctx, extras[p % extras.length], 60, 110, W - 120, 440);
+        cover(ctx, extras[p % extras.length]!, 60, 110, W - 120, 440);
         y = 600;
       }
       ctx.fillStyle = "#0E5BA8";
@@ -144,7 +144,7 @@ export async function buildPages(pub: Publication) {
 export function pagesToSheetTextures(pages: HTMLCanvasElement[]) {
   const sheets: { front: THREE.Texture; back: THREE.Texture }[] = [];
   for (let i = 0; i < pages.length; i += 2) {
-    sheets.push({ front: toTex(pages[i]), back: toTex(pages[i + 1] ?? pages[i], true) });
+    sheets.push({ front: toTex(pages[i]!), back: toTex(pages[i + 1] ?? pages[i]!, true) });
   }
   return sheets;
 }

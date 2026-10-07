@@ -1,7 +1,7 @@
 import type { Publication } from "@/lib/publications";
 import { BookCover } from "./BookCover";
 
-export function Bookshelf({ pubs, onPick, hiddenSlug }: { pubs: Publication[]; onPick: (p: Publication, rect: DOMRect) => void; hiddenSlug?: string }) {
+export function Bookshelf({ pubs, onPick, hiddenSlug }: { pubs: Publication[]; onPick: (p: Publication, rect: DOMRect) => void; hiddenSlug?: string | undefined }) {
   const rows: Publication[][] = [];
   for (let i = 0; i < pubs.length; i += 4) rows.push(pubs.slice(i, i + 4));
 
