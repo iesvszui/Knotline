@@ -11,9 +11,10 @@ const Reader3D = lazy(() => import("./Reader3D"));
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 type Phase = "hero" | "leaving" | "archive" | "focus" | "opening" | "reader";
+let resumeArchive = false;
 
 export function Experience({ initialSlug }: { initialSlug?: string }) {
-  const [phase, setPhase] = useState<Phase>("hero");
+  const [phase, setPhase] = useState<Phase>(() => (resumeArchive ? "archive" : "hero"));
   const [picked, setPicked] = useState<{ pub: Publication; rect: DOMRect } | null>(null);
   const navigate = useNavigate();
 
@@ -50,6 +51,7 @@ export function Experience({ initialSlug }: { initialSlug?: string }) {
   };
 
   const exitReader = () => {
+    resumeArchive = true;
     setPhase("archive");
     setPicked(null);
     navigate({ to: "/" });
