@@ -4,10 +4,10 @@ import { Experience } from "@/components/Experience";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KNOTLINE — Maritime Stories, Intelligence & Publications" },
-      { name: "description", content: "Explore maritime newsletters, reports and whitepapers as immersive digital publications." },
-      { property: "og:title", content: "KNOTLINE — Maritime Publication Archive" },
-      { property: "og:description", content: "Explore maritime newsletters, reports and whitepapers as immersive digital publications." },
+      { title: "KNOTLINE — Our Monthly Newspaper" },
+      { name: "description", content: "Discover our monthly newspaper celebrating birthdays, new joiners, festivals, achievements, and the moments we share." },
+      { property: "og:title", content: "KNOTLINE — Monthly Newspaper Archive" },
+      { property: "og:description", content: "Discover our monthly newspaper celebrating birthdays, new joiners, festivals, achievements, and the moments we share." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
