@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "KNOTLINE" },
-      { name: "description", content: "Maritime Stories, Intelligence & Publications" },
+      { name: "description", content: "Our monthly newspaper of celebrations, birthdays, new joiners, festivals, and achievements." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -41,8 +41,13 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, x: number, y: number,
   return y + lh;
 }
 
-const LOREM =
-  "Across the world's sea lanes, the quiet arithmetic of friction, fuel and time decides the fortunes of fleets. Operators who measure precisely gain an edge that compounds voyage after voyage. Our analysts spent the season aboard vessels, in dry docks and on terminal floors, collecting the observations that rarely make it into a spreadsheet. What emerges is a picture of an industry in transition, balancing regulatory pressure against commercial reality, and finding that the two are more aligned than they first appear. The data suggests that incremental improvements, consistently applied, outperform dramatic interventions. Crews remain the decisive variable, and technology is only as good as the routines that surround it. ";
+const SAMPLE_STORIES: Record<string, string> = {
+  "Celebrations & Festivals": "Shared celebrations make room for the traditions, stories, and people that bring a community together. This part of our monthly newspaper is dedicated to festival gatherings, team celebrations, and the photographs that capture those moments. It is a place for the little details worth remembering: a thoughtful decoration, a shared meal, and the joy of spending time together. ",
+  "Birthday Wishes": "Birthdays are a chance to pause and celebrate the people who make our everyday lives brighter. This section brings together birthday wishes, party photographs, and messages from friends and colleagues. From a slice of cake to a heartfelt note, the smallest gestures can become the most memorable part of someone's special day. ",
+  "Welcome, New Joiners": "A new face brings a new story to our community. Here we welcome new joiners, introduce their interests, and make space for the connections that help everyone feel at home. Friendly introductions, shared conversations, and a helping hand can turn a first day into the beginning of a lasting sense of belonging. ",
+  "Achievements & Milestones": "Every achievement has a story behind it: patience, teamwork, learning, and the encouragement of others. This section recognises individual accomplishments, team successes, and meaningful milestones. Big wins and quiet progress both deserve a place in our monthly newspaper, alongside appreciation for the people who made them possible. ",
+  "Around Our Community": "Some of the best moments happen between the big events. A conversation, a shared activity, or an act of kindness can make an ordinary day feel special. This section collects the everyday highlights and photographs that tell the wider story of our month together. ",
+};
 
 function toTex(c: HTMLCanvasElement, mirror = false) {
   const t = new THREE.CanvasTexture(c);
@@ -64,7 +69,8 @@ export async function buildPages(pub: Publication) {
   for (let p = 0; p < total; p++) {
     const c = document.createElement("canvas");
     c.width = W; c.height = H;
-    const ctx = c.getContext("2d")!;
+    const ctx = c.getContext("2d");
+    if (!ctx) throw new Error("Could not prepare newspaper pages");
 
     if (p === 0) {
       cover(ctx, coverImg, 0, 0, W, H);
@@ -96,7 +102,7 @@ export async function buildPages(pub: Publication) {
       ctx.letterSpacing = "4px";
       ctx.font = "400 14px Inter, sans-serif";
       ctx.fillStyle = "rgba(255,255,255,0.4)";
-      ctx.fillText("MARITIME STORIES, INTELLIGENCE & PUBLICATIONS", W / 2, H / 2 + 40);
+      ctx.fillText("OUR PEOPLE, OUR MOMENTS · THE MONTHLY NEWSPAPER", W / 2, H / 2 + 40);
       ctx.textAlign = "left";
       ctx.letterSpacing = "0px";
     } else {
@@ -109,14 +115,15 @@ export async function buildPages(pub: Publication) {
       ctx.fillStyle = "#1a1a1a";
       ctx.font = "500 13px Inter, sans-serif";
       ctx.letterSpacing = "4px";
-      ctx.fillText(`KNOTLINE — ${pub.title.toUpperCase()}`, 60, 64);
+      ctx.fillText(`KNOTLINE — ${pub.title.toUpperCase()} · SAMPLE EDITION`, 60, 64);
       ctx.letterSpacing = "0px";
       ctx.fillRect(60, 80, W - 120, 1);
       const section = pub.sections[Math.floor((p - 2) / 4) % pub.sections.length] ?? "";
       const layout = p % 4;
       let y = 140;
       if (layout === 2 || layout === 0) {
-        cover(ctx, extras[p % extras.length]!, 60, 110, W - 120, 440);
+        const image = extras[p % extras.length];
+        if (image) cover(ctx, image, 60, 110, W - 120, 440);
         y = 600;
       }
       ctx.fillStyle = "#0E5BA8";
@@ -131,7 +138,7 @@ export async function buildPages(pub: Publication) {
       ctx.fillStyle = "#333";
       const colW = (W - 120 - 30) / 2;
       const startY = y + 14;
-      const text = LOREM.repeat(3);
+      const text = (SAMPLE_STORIES[section] ?? SAMPLE_STORIES["Around Our Community"] ?? "").repeat(3);
       const half = Math.floor(text.length / 2);
       wrap(ctx, text.slice(p * 13 % 200, half), 60, startY, colW, 26, H - 110);
       wrap(ctx, text.slice(half), 60 + colW + 30, startY, colW, 26, H - 110);
@@ -149,7 +156,9 @@ export async function buildPages(pub: Publication) {
 export function pagesToSheetTextures(pages: HTMLCanvasElement[]) {
   const sheets: { front: THREE.Texture; back: THREE.Texture }[] = [];
   for (let i = 0; i < pages.length; i += 2) {
-    sheets.push({ front: toTex(pages[i]!), back: toTex(pages[i + 1] ?? pages[i]!, true) });
+    const front = pages[i];
+    if (!front) continue;
+    sheets.push({ front: toTex(front), back: toTex(pages[i + 1] ?? front, true) });
   }
   return sheets;
 }

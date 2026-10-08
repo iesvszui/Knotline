@@ -75,10 +75,10 @@ export function Experience({ initialSlug }: { initialSlug?: string }) {
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 1, ease: EASE }}
           >
-            <p className="eyebrow mb-8">Maritime Stories, Intelligence & Publications</p>
+            <p className="eyebrow mb-8">Our People, Our Moments · A Monthly Newspaper</p>
             <h1 className="font-display text-[18vw] font-semibold leading-none tracking-[0.06em] md:text-[11rem]">KNOTLINE</h1>
             <p className="mt-8 max-w-md text-base text-muted-foreground md:text-lg">
-              Explore our latest insights through immersive digital publications.
+              Celebrations, birthdays, new joiners, festivals, and achievements — all the moments that brought us together this month.
             </p>
             <button onClick={explore} className="btn-lux pointer-events-auto mt-12">
               Explore Archive <span aria-hidden>→</span>
@@ -106,8 +106,8 @@ export function Experience({ initialSlug }: { initialSlug?: string }) {
         >
           <header className="mb-24 flex flex-col items-center px-6 text-center">
             <button onClick={() => setPhase("hero")} className="font-display text-sm font-semibold tracking-[0.45em]">KNOTLINE</button>
-            <p className="eyebrow mt-16">The Archive · {publications.length} Publications</p>
-            <h2 className="mt-6 max-w-2xl font-serif text-4xl italic leading-tight md:text-6xl">A library of the sea, bound in editions.</h2>
+            <p className="eyebrow mt-16">The Archive · {publications.length} Monthly Editions</p>
+            <h2 className="mt-6 max-w-2xl font-serif text-4xl italic leading-tight md:text-6xl">Every month, a story of us.</h2>
           </header>
           <Bookshelf
             pubs={publications}
@@ -137,7 +137,7 @@ export function Experience({ initialSlug }: { initialSlug?: string }) {
             >
               <p className="eyebrow">{picked.pub.edition} · {picked.pub.date}</p>
               <p className="max-w-xs text-sm text-muted-foreground">{picked.pub.description}</p>
-              <button className="btn-lux mt-2" onClick={readIssue}>Read Issue</button>
+              <button className="btn-lux mt-2" onClick={readIssue}>Read Edition</button>
               <button className="btn-ghost-lux mt-1" onClick={() => setPhase("archive")}>Close</button>
             </motion.div>
           </motion.div>
