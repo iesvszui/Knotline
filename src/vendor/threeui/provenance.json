@@ -1,0 +1,60 @@
+{
+  "ashen-press": {
+    "source": "https://threeui.com/source-code/ashen-press.json",
+    "files": [
+      {
+        "path": "src/shaders/ashen-press/sources/ashen-press.html",
+        "language": "html",
+        "role": "canonical-source",
+        "bytes": 1156000,
+        "lines": 1693,
+        "sha256": "5fe2554e578acac5d55cb466a9564440e7767e38797981f8e829dfd2de0bc90f"
+      },
+      {
+        "path": "src/shaders/ashen-press/AshenPress.tsx",
+        "language": "tsx",
+        "role": "component",
+        "bytes": 2405,
+        "lines": 79,
+        "sha256": "36b365f7a69223f1c3347bfcb3f2d1aa1ab20d30f2c31e5efb248e62ab4ddc90"
+      },
+      {
+        "path": "src/shaders/threeui.css",
+        "language": "css",
+        "role": "shared-style",
+        "bytes": 40715,
+        "lines": 1775,
+        "sha256": "efe4447139f1358dd8e9be68edf6fa46cbefbd1de423a4d6c439ca61d2c8eccf"
+      }
+    ]
+  },
+  "sketchbook": {
+    "source": "https://threeui.com/source-code/sketchbook.json",
+    "files": [
+      {
+        "path": "src/shaders/sketchbook/Sketchbook.tsx",
+        "language": "tsx",
+        "role": "component",
+        "bytes": 844,
+        "lines": 28,
+        "sha256": "17847ea51bdebcc2cedd5f920d1d45188f307c3579387cb5309fa8b6e5c404af"
+      },
+      {
+        "path": "src/shaders/sketchbook/sketchbookDocument.js",
+        "language": "javascript",
+        "role": "renderer-source",
+        "bytes": 49383,
+        "lines": 12,
+        "sha256": "256ab28edfde9ed198ff86d8923437620833696f25e354c2ee5d77c60835df61"
+      },
+      {
+        "path": "src/shaders/threeui.css",
+        "language": "css",
+        "role": "shared-style",
+        "bytes": 40715,
+        "lines": 1775,
+        "sha256": "efe4447139f1358dd8e9be68edf6fa46cbefbd1de423a4d6c439ca61d2c8eccf"
+      }
+    ]
+  }
+}

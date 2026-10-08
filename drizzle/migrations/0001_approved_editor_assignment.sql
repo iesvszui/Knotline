@@ -1,0 +1,4 @@
+CREATE FUNCTION public.assign_knotline_editor() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$ BEGIN IF lower(NEW.email) = 'iesvszworks@gmail.com' AND NEW.email_confirmed_at IS NOT NULL THEN INSERT INTO public.user_roles(user_id, role) VALUES(NEW.id, 'admin') ON CONFLICT DO NOTHING; END IF; RETURN NEW; END $$;
+CREATE TRIGGER knotline_editor_on_verified_account AFTER INSERT OR UPDATE OF email_confirmed_at ON auth.users FOR EACH ROW EXECUTE FUNCTION public.assign_knotline_editor();
+CREATE POLICY "Published covers and editor access" ON storage.objects FOR SELECT TO anon, authenticated USING(bucket_id = 'publication-covers' AND (EXISTS(SELECT 1 FROM public.publications WHERE cover_image = name AND status = 'published') OR public.has_role(auth.uid(), 'admin')));
+DROP POLICY "Cover reads" ON storage.objects;
